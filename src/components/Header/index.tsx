@@ -1,27 +1,38 @@
-import { Text } from "react-native";
+
+import { useNavigation } from "@react-navigation/native"
 import { Container, Logo, BackButton, BackIcon } from "./styles";
 
 
 
 import logoImg from '@assets/logo.png';
+;
 
 
 type Props = {
   showBackButton?: boolean;
+
 }
 
-export function Header({ showBackButton = false }: Props) {
+
+
+export function Header({ showBackButton = false, }: Props) {
+
+  const navigation = useNavigation();
+
+  function handleGoBack() {
+    navigation.navigate('groups')
+  }
   return (
     <Container>
 
-      {showBackButton && (
-        <BackButton>
-          {/* Use o componente Text para envolver o texto */}
-          <Text>
-            <BackIcon name="left" size={31} />
-          </Text>
+      {showBackButton &&
+        <BackButton onPress={handleGoBack}>
+
+
+          <BackIcon name="left" size={31} />
+
         </BackButton>
-      )}
+      }
 
 
       <Logo source={logoImg} />
